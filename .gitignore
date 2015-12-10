@@ -12,6 +12,7 @@
 hs_err_pid*
 
 # build/target directory
+bin/
 target/
 
 .DS_Store
