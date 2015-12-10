@@ -1,0 +1,77 @@
+<project name="mflux-test" default="pkg" basedir=".">
+	<description>Test Plugin Package</description>
+
+	<property file="build.properties" />
+
+	<property name="src" location="./src" />
+	<property name="mfpkg" location="./mfpkg" />
+	<property name="target" location="./target" />
+	<property name="aplugin-jar" location="${mf.home}/dev/plugin/lib/aplugin.jar" />
+	<property name="plugin-jar" value="${pkg.name}-plugin.jar" />
+	<property name="plugin-zip" value="${pkg.name}-plugin.zip" />
+	<property name="pkg-file" value="mfpkg-${pkg.name}-${pkg.version}.zip" />
+
+	<!-- -->
+	<!--Target: init-->
+	<!-- -->
+	<target name="init">
+		<tstamp>
+			<format property="build.time" pattern="dd-MMM-yyyy kk:mm:ss z" />
+		</tstamp>
+		<delete quiet="true" dir="${target}" />
+		<mkdir dir="${target}" />
+		<mkdir dir="${target}/build" />
+	</target>
+
+	<!-- -->
+	<!--Target: clean-->
+	<!-- -->
+	<target name="clean">
+		<delete quiet="true">
+			<fileset dir="${target}" includes="**/*" />
+		</delete>
+	</target>
+
+	<!-- -->
+	<!--Target: compile-->
+	<!-- -->
+	<target name="compile" depends="init,clean" description="Compile the java source">
+		<javac debug="on" debuglevel="lines,vars,source" srcdir="${src}" destdir="${target}/build" source="1.7" target="1.7">
+			<classpath>
+				<pathelement location="${aplugin-jar}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- -->
+	<!--Target: jar -->
+	<!-- -->
+	<target name="jar" depends="compile" description="make plugin jar.">
+		<jar filesonly="true" destfile="${target}/${plugin-jar}">
+			<fileset dir="${target}/build" includes="**/*" />
+		</jar>
+	</target>
+
+	<!-- -->
+	<!-- Target: pkg -->
+	<!-- -->
+	<target name="pkg" depends="jar" description="make plugin package.">
+		<zip filesonly="true" destfile="${target}/${plugin-zip}">
+			<fileset dir="${target}" includes="${plugin-jar}" />
+		</zip>
+		<delete file="${target}/__manifest.xml" />
+		<copy file="${mfpkg}/__manifest.xml" tofile="${target}/__manifest.xml" />
+		<replace file="${target}/__manifest.xml" token="@PKG_NAME@" value="${pkg.name}" />
+		<replace file="${target}/__manifest.xml" token="@PKG_VERSION@" value="${pkg.version}" />
+		<replace file="${target}/__manifest.xml" token="@PKG_BUILD_TIME@" value="${build.time}" />
+		<replace file="${target}/__manifest.xml" token="@PKG_VENDOR@" value="${pkg.vendor}" />
+		<replace file="${target}/__manifest.xml" token="@PKG_VENDOR_URL@" value="${pkg.vendor.url}" />
+		<replace file="${target}/__manifest.xml" token="@PKG_DESCRIPTION@" value="${pkg.description}" />
+		<zip filesonly="true" destfile="${target}/${pkg-file}">
+			<fileset dir="${mfpkg}" includes="**/*.tcl" />
+			<fileset dir="${target}" includes="__manifest.xml" />
+			<fileset dir="${target}" includes="${plugin-zip}" />
+		</zip>
+	</target>
+
+</project>

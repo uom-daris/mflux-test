@@ -1,0 +1,8 @@
+<manifest>
+	<package>@PKG_NAME@</package>
+	<version>@PKG_VERSION@</version>
+	<build-time>@PKG_BUILD_TIME@</build-time>
+	<vendor>@PKG_VENDOR@</vendor>
+	<vendorurl>@PKG_VENDOR_URL@</vendorurl>
+	<description>@PKG_DESCRIPTION@</description>
+</manifest>
