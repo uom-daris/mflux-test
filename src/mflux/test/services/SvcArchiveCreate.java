@@ -86,7 +86,7 @@ public class SvcArchiveCreate extends PluginService {
                         PluginTask.threadTaskCompleted();
                     } finally {
                         pos.close();
-                        pis.close();
+//                        pis.close();
                     }
                 } catch (Throwable e) {
                     e.printStackTrace(System.out);
