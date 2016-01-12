@@ -7,6 +7,7 @@
 	<property name="mfpkg" location="./mfpkg" />
 	<property name="target" location="./target" />
 	<property name="aplugin-jar" location="${mf.home}/dev/plugin/lib/aplugin.jar" />
+	<property name="mfclient-jar" location="${mf.home}/dev/client/java/mfclient.jar" />
 	<property name="plugin-jar" value="${pkg.name}-plugin.jar" />
 	<property name="plugin-zip" value="${pkg.name}-plugin.zip" />
 	<property name="pkg-file" value="mfpkg-${pkg.name}-${pkg.version}.zip" />
@@ -39,6 +40,7 @@
 		<javac debug="on" debuglevel="lines,vars,source" srcdir="${src}" destdir="${target}/build" source="1.7" target="1.7">
 			<classpath>
 				<pathelement location="${aplugin-jar}" />
+				<pathelement location="${mfclient-jar}" />
 			</classpath>
 		</javac>
 	</target>
@@ -48,7 +50,7 @@
 	<!-- -->
 	<target name="jar" depends="compile" description="make plugin jar.">
 		<jar filesonly="true" destfile="${target}/${plugin-jar}">
-			<fileset dir="${target}/build" includes="**/*" />
+			<fileset dir="${target}/build" includes="mflux/plugin/**/*" />
 		</jar>
 	</target>
 

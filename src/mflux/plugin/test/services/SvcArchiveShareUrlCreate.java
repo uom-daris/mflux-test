@@ -1,4 +1,4 @@
-package mflux.test.services;
+package mflux.plugin.test.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

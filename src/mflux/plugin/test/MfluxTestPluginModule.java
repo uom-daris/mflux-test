@@ -1,4 +1,4 @@
-package mflux.test;
+package mflux.plugin.test;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Vector;
 import arc.mf.plugin.ConfigurationResolver;
 import arc.mf.plugin.PluginModule;
 import arc.mf.plugin.PluginService;
-import mflux.test.services.SvcArchiveCreate;
-import mflux.test.services.SvcArchiveShareUrlCreate;
+import mflux.plugin.test.services.SvcArchiveCreate;
+import mflux.plugin.test.services.SvcArchiveShareUrlCreate;
 
 public class MfluxTestPluginModule implements PluginModule {
 
