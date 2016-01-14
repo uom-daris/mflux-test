@@ -12,6 +12,7 @@ import arc.mf.plugin.PluginTask;
 import arc.mf.plugin.PluginThread;
 import arc.mf.plugin.ServiceExecutor;
 import arc.mf.plugin.dtype.StringType;
+import arc.streams.NonCloseInputStream;
 import arc.xml.XmlDoc.Element;
 import arc.xml.XmlDoc;
 import arc.xml.XmlDocMaker;
@@ -86,7 +87,7 @@ public class SvcArchiveCreate extends PluginService {
                         PluginTask.threadTaskCompleted();
                     } finally {
                         pos.close();
-//                        pis.close();
+                        // pis.close();
                     }
                 } catch (Throwable e) {
                     e.printStackTrace(System.out);
